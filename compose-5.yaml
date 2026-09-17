@@ -1,0 +1,42 @@
+# Mustaqil topshiriq uchun — besh tugun.
+# Ishga tushirish:  docker compose -f compose-5.yaml up -d --build
+#
+# 3-topshiriq (sunʼiy kechikish): KECHIKISH_MS qiymatini variantingizga moslang.
+# 4-topshiriq (resurs cheklovi): tugun5 dagi deploy.resources blokiga qarang.
+
+x-tugun: &tugun
+  build: .
+  environment:
+    - KECHIKISH_MS=0
+
+services:
+  tugun1:
+    <<: *tugun
+    environment: [ "NODE_NAME=tugun1", "KECHIKISH_MS=0" ]
+    ports: [ "8081:8080" ]
+  tugun2:
+    <<: *tugun
+    environment: [ "NODE_NAME=tugun2", "KECHIKISH_MS=0" ]
+    ports: [ "8082:8080" ]
+  tugun3:
+    <<: *tugun
+    environment: [ "NODE_NAME=tugun3", "KECHIKISH_MS=0" ]
+    ports: [ "8083:8080" ]
+  tugun4:
+    <<: *tugun
+    environment: [ "NODE_NAME=tugun4", "KECHIKISH_MS=0" ]
+    ports: [ "8084:8080" ]
+  tugun5:
+    <<: *tugun
+    environment: [ "NODE_NAME=tugun5", "KECHIKISH_MS=0" ]
+    ports: [ "8085:8080" ]
+    # 4-topshiriq: CPU cheklovi. Sinovdan oldin izohni oching.
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "0.2"
+    #       memory: 64M
+
+networks:
+  default:
+    name: dt-tarmoq
